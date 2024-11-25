@@ -1,0 +1,14 @@
+{
+  "printWidth": 100,
+  "trailingComma": "es5",
+  "tabWidth": 4,
+  "singleQuote": true,
+  "bracketSpacing": true,
+  "endOfLine": "auto",
+  "semi": false,
+  "importOrder": [
+    "^[./]"
+  ],
+  "importOrderSeparation": false,
+  "importOrderSortSpecifiers": true
+}
