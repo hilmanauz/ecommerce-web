@@ -32,7 +32,7 @@ export function ProductDetail({ data }: ProductDetailProps) {
             <div className="md:w-1/2 h-full p-10 flex justify-center">
                 <Image src={data.image} className="max-w-sm" />
             </div>
-            <div className="md:w-1/2 py-5 pr-8">
+            <div className="md:w-1/2 py-5 md:pr-8 px-3">
                 <h1 className="text-3xl font-bold mb-4">{data.title}</h1>
                 <div className="flex justify-between mb-4">
                     <p className="text-2xl font-bold">

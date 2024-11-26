@@ -39,7 +39,7 @@ export function TableRow({ item }: TableRowProps) {
                 />
             </Table.Td>
             <Table.Td className="max-w-10">
-                <Text truncate>
+                <Text>
                     {formatCurrency((item.product?.price || 0) * item.quantity, 'en-US', 'USD')}
                 </Text>
             </Table.Td>

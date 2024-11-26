@@ -1,18 +1,25 @@
 'use client'
 
-import { Button } from '@/components/atoms'
+import { Button, Text } from '@/components/atoms'
 import { InputControl } from '@/components/moleculs'
 import { useCartContext } from '@/providers/cart-provider'
 import { formatCurrency } from '@/utils'
-import { Divider } from '@mantine/core'
+import { Divider, Modal } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
+import { notifications } from '@mantine/notifications'
+import { useRouter } from 'next/navigation'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
+import { AiOutlineCheckCircle } from 'react-icons/ai'
 
 export default function CheckoutPage() {
-    const { handleSubmit, control } = useForm({
+    const router = useRouter()
+    const { handleSubmit, control, reset, watch } = useForm({
         mode: 'onSubmit',
     })
+    const [isOpen, { open, close }] = useDisclosure()
+    const data = watch()
 
-    const { carts } = useCartContext()
+    const { carts, clearCart } = useCartContext()
 
     const shipping = 4.99
 
@@ -24,8 +31,7 @@ export default function CheckoutPage() {
     const total = (subtotal || 0) + tax + shipping
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        // Here you would typically handle the checkout process
-        console.log('Checkout submitted', data)
+        open()
     }
 
     return (
@@ -164,6 +170,47 @@ export default function CheckoutPage() {
                     Place Order
                 </Button>
             </form>
+            <Modal opened={isOpen} onClose={close} title="Payment Process" centered>
+                <div className="w-full h-full space-y-3">
+                    <div className="space-y-1">
+                        {Object.entries(data).map(([key, value]) => (
+                            <div className="justify-between flex" key={key}>
+                                <Text tt={'capitalize'}>{key.split('_').join(' ')}</Text>
+                                <Text>{value}</Text>
+                            </div>
+                        ))}
+                    </div>
+                    <Divider />
+                    <div className="flex justify-between text-lg font-bold">
+                        <span>Total:</span>
+                        <span>{formatCurrency(total || 0, 'en-US', 'USD')}</span>
+                    </div>
+                    <Button
+                        onClick={() => {
+                            router.push('/')
+                            setTimeout(() => {
+                                clearCart(carts?.userId || 0)
+                                reset({})
+                                close()
+                                notifications.show({
+                                    message: 'Thank you for your order',
+                                    withBorder: true,
+                                    title: 'Order Successfull!',
+                                    color: 'blue',
+                                    icon: <AiOutlineCheckCircle />,
+                                })
+                            }, 200)
+                        }}
+                        disabled={!total}
+                        fullWidth
+                        variant="filled"
+                        color="blue"
+                        size="md"
+                    >
+                        PAY
+                    </Button>
+                </div>
+            </Modal>
         </div>
     )
 }

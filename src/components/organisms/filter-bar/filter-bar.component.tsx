@@ -53,30 +53,36 @@ export function FilterBar({ categories }: { categories: Array<string> }) {
                         </Text>
                     </div>
                 </div>
-                <ul
-                    className={classNames(
-                        'grid gap-2 text-sm mt-2 max-h-[400px] overflow-y-auto',
-                        isLoading && 'h-28'
-                    )}
-                >
-                    <LoadingOverlay visible={isLoading} />
-                    {carts?.products.map((item) => (
-                        <li>
-                            <Link
-                                href={`/products/${item.product?.id}`}
-                                className="font-medium flex gap-x-2 justify-between"
-                                prefetch={false}
-                            >
-                                <Text lineClamp={1} className="w-[80%] hover:underline">
-                                    {item.product?.title}
-                                </Text>
-                                <Text lineClamp={1} className="w-[28%] text-end">
-                                    {formatCurrency(item.product?.price || 0, 'en-US', 'USD')}
-                                </Text>
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
+                {carts?.products.length ? (
+                    <ul
+                        className={classNames(
+                            'grid gap-2 text-sm mt-2 max-h-[400px] overflow-y-auto',
+                            isLoading && 'h-28'
+                        )}
+                    >
+                        <LoadingOverlay visible={isLoading} />
+                        {carts?.products.map((item) => (
+                            <li>
+                                <Link
+                                    href={`/products/${item.product?.id}`}
+                                    className="font-medium flex gap-x-2 justify-between"
+                                    prefetch={false}
+                                >
+                                    <Text lineClamp={1} className="w-[80%] hover:underline">
+                                        {item.product?.title}
+                                    </Text>
+                                    <Text lineClamp={1} className="w-[28%] text-end">
+                                        {formatCurrency(item.product?.price || 0, 'en-US', 'USD')}
+                                    </Text>
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <div className="h-28 flex justify-center items-center">
+                        <Heading order={5}>Your cart is empty.</Heading>
+                    </div>
+                )}
             </Card>
         </div>
     )
