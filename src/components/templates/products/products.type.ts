@@ -1,0 +1,14 @@
+export type ProductProps = {
+    id: number
+    title: string
+    price: number
+    description: string
+    category: string
+    image: string
+    rating: { rate: number; count: number }
+}
+
+export type ProductsProps = {
+    ListProductPage: React.ReactNode
+    FilterBar: React.ReactNode
+}

@@ -28,7 +28,6 @@ export const nextAuthSession: NextAuthOptions = {
                     username: credentials.username,
                     password: credentials.password,
                 }
-                console.log(payload)
                 const res = await loginFetch(payload)
                 const data = await res.json()
                 if (!res.ok) {
@@ -50,7 +49,9 @@ export const nextAuthSession: NextAuthOptions = {
             if (account && user) {
                 return {
                     ...token,
-                    ...user.user,
+                    user: {
+                        username: user.username,
+                    },
                     token: user.token,
                 }
             }
@@ -60,7 +61,7 @@ export const nextAuthSession: NextAuthOptions = {
 
         session({ session, token }: any) {
             session.token = token.token
-            session.user.username = token.username
+            session.user.username = token.user.username
             return session
         },
     },

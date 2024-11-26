@@ -4,6 +4,7 @@ import './globals.css'
 import '@mantine/core/styles.css'
 import GlobalProvider from '@/providers/global-provider'
 import '@mantine/notifications/styles.css'
+import { MainLayout } from '@/components/atoms'
 
 const geistSans = localFont({
     src: './fonts/GeistVF.woff',
@@ -29,7 +30,9 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased relative`}>
-                <GlobalProvider>{children}</GlobalProvider>
+                <GlobalProvider>
+                    <MainLayout>{children}</MainLayout>
+                </GlobalProvider>
             </body>
         </html>
     )

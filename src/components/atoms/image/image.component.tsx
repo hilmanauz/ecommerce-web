@@ -1,9 +1,9 @@
 import React, { ForwardRefRenderFunction, forwardRef, memo } from 'react'
 import { ImageProps } from './image.types'
-import ImageComp from 'next/image'
+import { Image as ImageComp } from '@mantine/core'
 
 const ImageComponent: ForwardRefRenderFunction<HTMLImageElement, ImageProps> = (
-    { className, placeholder, withPlaceholder, ...props },
+    { className, ...props },
     ref
 ): JSX.Element => {
     return (
@@ -11,7 +11,6 @@ const ImageComponent: ForwardRefRenderFunction<HTMLImageElement, ImageProps> = (
             {...props}
             className={className}
             src={props.src || `/images/placeholder.png`}
-            objectFit=""
             ref={ref}
         />
     )

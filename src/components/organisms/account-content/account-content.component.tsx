@@ -1,12 +1,13 @@
 import React from 'react'
 import { AccountContentProps } from './account-content.types'
-import { Button, Heading, Image, LoadingOverlay, Text } from '@/components/atoms'
+import { Button, Heading, LoadingOverlay, Text } from '@/components/atoms'
 import { useForm } from 'react-hook-form'
 import { notifications } from '@mantine/notifications'
 import { useDisclosure, useMediaQuery } from '@mantine/hooks'
 import Link from 'next/link'
 import { InputControl } from '@/components/moleculs'
 import { em } from '@mantine/core'
+import Image from 'next/image'
 
 export function AccountContent({
     title,

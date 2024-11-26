@@ -5,7 +5,7 @@ export const ApiClient: FetchApiProps = (client) => {
     return {
         getData: async (api) => {
             try {
-                const { data } = await client.get(api)
+                const data = await client.get(api)
                 return data
             } catch (error) {
                 const errorData = error as {

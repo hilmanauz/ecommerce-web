@@ -15,7 +15,18 @@ function GlobalProvider({ children }: { children: React.ReactNode }) {
     }
     return (
         <AuthProvider>
-            <MantineProvider>
+            <MantineProvider
+                theme={{
+                    headings: {
+                        fontFamily: 'Greycliff CF, sans-serif',
+                    },
+                    fontFamily: 'Geist, sans-serif',
+                    fontSizes: {
+                        base: '14px',
+                        sm: '12px',
+                    },
+                }}
+            >
                 <SWRConfig
                     value={{
                         shouldRetryOnError: false,

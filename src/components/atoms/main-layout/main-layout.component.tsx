@@ -6,7 +6,7 @@ export const MainLayout: React.FC<MainLayoutProps> = (props) => {
         <main
             {...props}
             className={classNames(
-                'h-screen w-screen flex flex-col flex-wrap bg-slate-50',
+                'min-h-screen min-w-screen flex flex-col flex-wrap bg-slate-50',
                 props.className || ''
             )}
         />

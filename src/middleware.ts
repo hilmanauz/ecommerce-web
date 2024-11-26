@@ -8,7 +8,6 @@ export default withAuth({
         }: {
             token: (JWT & { error?: 'RefreshAccessTokenError' }) | null
         }) => {
-            console.log(token)
             return token !== null && token?.error !== 'RefreshAccessTokenError'
         },
     },
