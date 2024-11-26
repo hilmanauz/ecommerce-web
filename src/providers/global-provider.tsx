@@ -4,6 +4,7 @@ import AuthProvider from './auth-provider'
 import { Notifications } from '@mantine/notifications'
 import { SWRConfig } from 'swr'
 import { MantineProvider } from '@mantine/core'
+import CartProvider from './cart-provider'
 
 function GlobalProvider({ children }: { children: React.ReactNode }) {
     const [hydrated, setHydrated] = React.useState(false)
@@ -32,7 +33,7 @@ function GlobalProvider({ children }: { children: React.ReactNode }) {
                         shouldRetryOnError: false,
                     }}
                 >
-                    {children}
+                    <CartProvider>{children}</CartProvider>
                     <Notifications />
                 </SWRConfig>
             </MantineProvider>

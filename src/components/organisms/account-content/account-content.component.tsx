@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { AccountContentProps } from './account-content.types'
 import { Button, Heading, LoadingOverlay, Text } from '@/components/atoms'

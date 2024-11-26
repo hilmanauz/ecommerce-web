@@ -19,5 +19,10 @@ export const ApiClient: FetchApiProps = (client) => {
                     })
             }
         },
+        updateCart: async (props) => {
+            const { productId, ...payload } = props
+            const { data } = await client.put(`/carts/${productId}`, payload.payload)
+            return data
+        },
     }
 }

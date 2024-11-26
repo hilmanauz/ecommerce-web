@@ -1,20 +1,11 @@
+'use client'
 import React, { memo, useMemo } from 'react'
 import { InputControlProps, InputType } from './input-control.types'
-import { FormControl, PasswordInput, TextInput } from '../../atoms'
+import { FormControl, PasswordInput, Select, TextInput } from '../../atoms'
 import { capitalize } from 'lodash'
 import { FieldValues, useFormContext } from 'react-hook-form'
 import { InputRules } from '@/components/atoms/form-control/form-control.types'
-import { classNames as utilsClassNames } from '@/utils'
-
-const directionKey = new Set([
-    'Enter',
-    'Tab',
-    'ArrowUp',
-    'ArrowDown',
-    'ArrowLeft',
-    'ArrowRight',
-    'Backspace',
-])
+import { handlePreventAlphabet, classNames as utilsClassNames } from '@/utils'
 
 const InputControlComponent: React.FC<InputControlProps<any, InputType>> = ({
     type,
@@ -44,6 +35,8 @@ const InputControlComponent: React.FC<InputControlProps<any, InputType>> = ({
                 return TextInput
             case 'password':
                 return PasswordInput
+            case 'select':
+                return Select
             default:
                 return TextInput
         }
@@ -92,16 +85,6 @@ const InputControlComponent: React.FC<InputControlProps<any, InputType>> = ({
         }
         return { ...rules, ...defaultRule }
     }, [required, name, type, rules, opt])
-
-    const handlePreventAlphabet = React.useCallback(
-        (event: React.KeyboardEvent<HTMLInputElement>) => {
-            const re = /[0-9]+/g
-            if (!re.test(event.key) && !directionKey.has(event.key)) {
-                event.preventDefault()
-            }
-        },
-        []
-    )
 
     return (
         <FormControl name={name} control={control} rules={rulesType}>
